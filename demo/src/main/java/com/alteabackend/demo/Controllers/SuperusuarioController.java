@@ -22,22 +22,22 @@ public class SuperusuarioController {
 
     @GetMapping("/superusuarios")
     public List<Superusuario> getAllSuperusuarios(){
-        return superusuarioRepository.findAll();
+        return superusuarioRepository.getAllSuperusuario();
     }
 
     @GetMapping("/superusuarios/{id}")
     public Superusuario getSuperusuario(@PathVariable(value="id") Long id){
-        return superusuarioRepository.findSuperusuarioById(id);
+        return superusuarioRepository.getSuperusuario(id);
     }
 
     @PostMapping("/superusuarios")
     public Superusuario createSuperusuario(@RequestBody Superusuario superusuario){
-        return superusuarioRepository.save(superusuario);
+        return superusuarioRepository.createSuperusuario(superusuario);
     }
 
     @DeleteMapping("/superusuario/{id}")
     public ResponseEntity<Superusuario> deleteSuperusuario(@PathVariable (value = "id") Long id){
-        superusuarioRepository.delete(superusuarioRepository.findSuperusuarioById(id));
+        superusuarioRepository.deleteSuperusuario(id);
         return ResponseEntity.ok().build();
     }
 }

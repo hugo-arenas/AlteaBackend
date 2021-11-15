@@ -22,23 +22,23 @@ public class PatologiaController {
     PatologiaRepository patologiaRepository;
 
     @GetMapping("/patologias")
-    public List<Patologia> getAllPatologias(){
-        return patologiaRepository.findAll();
+    public List<Patologia> getAllPatologia(){
+        return patologiaRepository.getAllPatologia();
     }
 
     @GetMapping("/patologias/{id}")
     public Patologia getPatologia(@PathVariable(value="id") Long id){
-        return patologiaRepository.findPatologiaById(id);
+        return patologiaRepository.getPatologia(id);
     }
 
     @PostMapping("/patologias")
     public Patologia createPatologia(@RequestBody Patologia patologia){
-        return patologiaRepository.save(patologia);
+        return patologiaRepository.createPatologia(patologia);
     }
 
     @DeleteMapping("/patologia/{id}")
     public ResponseEntity<Patologia> deletePatologia(@PathVariable (value = "id") Long id){
-        patologiaRepository.delete(patologiaRepository.findPatologiaById(id));
+        patologiaRepository.deletePatologia(id);
         return ResponseEntity.ok().build();
     }
 }

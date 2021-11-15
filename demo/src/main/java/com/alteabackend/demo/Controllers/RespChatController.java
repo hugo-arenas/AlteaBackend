@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @CrossOrigin(origins="*")
 @RestController
 public class RespChatController {
@@ -19,23 +21,23 @@ public class RespChatController {
     RespChatRepository respChatRepository;
 
     @GetMapping("/respChats")
-    public List<RespChat> getAllRespChats(){
-        return respChatRepository.findAll();
+    public List<RespChat> getAllRespChat(){
+        return respChatRepository.getAllRespChat();
     }
 
     @GetMapping("/respChats/{id}")
     public RespChat getRespChat(@PathVariable(value="id") Long id){
-        return respChatRepository.findRespChatById(id);
+        return respChatRepository.getRespChat(id);
     }
 
     @PostMapping("/respChats")
     public RespChat createRespChat(@RequestBody RespChat respChat){
-        return respChatRepository.save(respChat);
+        return respChatRepository.createRespChat(respChat);
     }
 
     @DeleteMapping("/respChat/{id}")
     public ResponseEntity<RespChat> deleteRespChat(@PathVariable (value = "id") Long id){
-        respChatRepository.delete(respChatRepository.findRespChatById(id));
+        respChatRepository.deleteRespChat(id);
         return ResponseEntity.ok().build();
     }
 }

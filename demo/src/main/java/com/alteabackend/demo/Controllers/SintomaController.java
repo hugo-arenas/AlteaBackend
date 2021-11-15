@@ -22,22 +22,22 @@ public class SintomaController {
 
     @GetMapping("/sintomas")
     public List<Sintoma> getAllSintomas(){
-        return sintomaRepository.findAll();
+        return sintomaRepository.getAllSintoma();
     }
 
     @GetMapping("/sintomas/{id}")
     public Sintoma getSintoma(@PathVariable(value="id") Long id){
-        return sintomaRepository.findSintomaById(id);
+        return sintomaRepository.getSintoma(id);
     }
 
     @PostMapping("/sintomas")
     public Sintoma createSintoma(@RequestBody Sintoma sintoma){
-        return sintomaRepository.save(sintoma);
+        return sintomaRepository.createSintoma(sintoma);
     }
 
     @DeleteMapping("/sintoma/{id}")
     public ResponseEntity<Sintoma> deleteSintoma(@PathVariable (value = "id") Long id){
-        sintomaRepository.delete(sintomaRepository.findSintomaById(id));
+        sintomaRepository.deleteSintoma(id);
         return ResponseEntity.ok().build();
     }
 }

@@ -22,22 +22,22 @@ public class UsuarioController {
 
     @GetMapping("/usuarios")
     public List<Usuario> getAllUsuarios(){
-        return usuarioRepository.findAll();
+        return usuarioRepository.getAllUsuario();
     }
 
     @GetMapping("/usuarios/{id}")
     public Usuario getUsuario(@PathVariable(value="id") Long id){
-        return usuarioRepository.findUsuarioById(id);
+        return usuarioRepository.getUsuario(id);
     }
 
     @PostMapping("/usuarios")
     public Usuario createUsuario(@RequestBody Usuario usuario){
-        return usuarioRepository.save(usuario);
+        return usuarioRepository.createUsuario(usuario);
     }
 
     @DeleteMapping("/usuario/{id}")
     public ResponseEntity<Usuario> deleteUsuario(@PathVariable (value = "id") Long id){
-        usuarioRepository.delete(usuarioRepository.findUsuarioById(id));
+        usuarioRepository.deleteUsuario(id);
         return ResponseEntity.ok().build();
     }
 }

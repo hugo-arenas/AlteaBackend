@@ -22,23 +22,23 @@ public class ConsejoController {
     ConsejoRepository consejoRepository;
 
     @GetMapping("/consejos")
-    public List<Consejo> getAllConsejos(){
-        return consejoRepository.findAll();
+    public List<Consejo> getAllConsejo(){
+        return consejoRepository.getAllConsejo();
     }
 
     @GetMapping("/consejos/{id}")
     public Consejo getConsejo(@PathVariable(value="id") Long id){
-        return consejoRepository.findConsejoById(id);
+        return consejoRepository.getConsejo(id);
     }
 
     @PostMapping("/consejos")
     public Consejo createConsejo(@RequestBody Consejo consejo){
-        return consejoRepository.save(consejo);
+        return consejoRepository.createConsejo(consejo);
     }
 
     @DeleteMapping("/consejo/{id}")
     public ResponseEntity<Consejo> deleteConsejo(@PathVariable (value = "id") Long id){
-        consejoRepository.delete(consejoRepository.findConsejoById(id));
+        consejoRepository.deleteConsejo(id);
         return ResponseEntity.ok().build();
     }
 }

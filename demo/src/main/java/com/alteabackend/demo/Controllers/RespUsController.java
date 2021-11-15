@@ -21,23 +21,23 @@ public class RespUsController {
     RespUsRepository respUsRepository;
 
     @GetMapping("/respUss")
-    public List<RespUs> getAllRespUss(){
-        return respUsRepository.findAll();
+    public List<RespUs> getAllRespUs(){
+        return respUsRepository.getAllRespUs();
     }
 
     @GetMapping("/respUss/{id}")
     public RespUs getRespUs(@PathVariable(value="id") Long id){
-        return respUsRepository.findRespUsById(id);
+        return respUsRepository.getRespUs(id);
     }
 
     @PostMapping("/respUss")
     public RespUs createRespUs(@RequestBody RespUs respUs){
-        return respUsRepository.save(respUs);
+        return respUsRepository.createRespUs(respUs);
     }
 
     @DeleteMapping("/respUs/{id}")
     public ResponseEntity<RespUs> deleteRespUs(@PathVariable (value = "id") Long id){
-        respUsRepository.delete(respUsRepository.findRespUsById(id));
+        respUsRepository.deleteRespUs(id);
         return ResponseEntity.ok().build();
     }
 }

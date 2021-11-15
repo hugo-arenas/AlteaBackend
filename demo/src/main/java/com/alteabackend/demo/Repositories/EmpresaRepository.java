@@ -12,5 +12,5 @@ public interface EmpresaRepository {
     public boolean updateEmpresa(Empresa nuevoEmpresa);
     public Empresa getUserByToken(String token);
     public Empresa logIn(Empresa user);
-    public String logOut(SupEmpresa user);
+    public String logOut(Empresa user);
 }

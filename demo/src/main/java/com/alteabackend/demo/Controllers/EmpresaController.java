@@ -19,26 +19,26 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class EmpresaController {
     @Autowired
-    EmpresaReposaaaitory empresaRepository;
+    EmpresaRepository empresaRepository;
 
     @GetMapping("/empresas")
     public List<Empresa> getAllEmpresas(){
-        return empresaRepository.findAll();
+        return empresaRepository.getAllEmpresa();
     }
 
     @GetMapping("/empresas/{id}")
     public Empresa getEmpresa(@PathVariable(value="id") Long id){
-        return empresaRepository.findEmpresaById(id);
+        return empresaRepository.getEmpresa(id);
     }
 
     @PostMapping("/empresas")
     public Empresa createEmpresa(@RequestBody Empresa empresa){
-        return empresaRepository.save(empresa);
+        return empresaRepository.createEmpresa(empresa);
     }
 
     @DeleteMapping("/empresa/{id}")
     public ResponseEntity<Empresa> deleteEmpresa(@PathVariable (value = "id") Long id){
-        empresaRepository.delete(empresaRepository.findEmpresaById(id));
+        empresaRepository.deleteEmpresa(id);
         return ResponseEntity.ok().build();
     }
 }

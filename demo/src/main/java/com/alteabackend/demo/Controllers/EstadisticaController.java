@@ -22,22 +22,22 @@ public class EstadisticaController {
 
     @GetMapping("/estadisticas")
     public List<Estadistica> getAllEstadisticas(){
-        return estadisticaRepository.findAll();
+        return estadisticaRepository.getAllEstadistica();
     }
 
     @GetMapping("/estadisticas/{id}")
     public Estadistica getEstadistica(@PathVariable(value="id") Long id){
-        return estadisticaRepository.findEstadisticaById(id);
+        return estadisticaRepository.getEstadistica(id);
     }
 
     @PostMapping("/estadisticas")
     public Estadistica createEstadistica(@RequestBody Estadistica estadistica){
-        return estadisticaRepository.save(estadistica);
+        return estadisticaRepository.createEstadistica(estadistica);
     }
 
     @DeleteMapping("/estadistica/{id}")
     public ResponseEntity<Estadistica> deleteEstadistica(@PathVariable (value = "id") Long id){
-        estadisticaRepository.delete(estadisticaRepository.findEstadisticaById(id));
+        estadisticaRepository.deleteEstadistica(id);
         return ResponseEntity.ok().build();
     }
 }

@@ -22,23 +22,23 @@ public class NoticiaController {
     NoticiaRepository noticiaRepository;
 
     @GetMapping("/noticias")
-    public List<Noticia> getAllNoticias(){
-        return noticiaRepository.findAll();
+    public List<Noticia> getAllNoticia(){
+        return noticiaRepository.getAllNoticia();
     }
 
     @GetMapping("/noticias/{id}")
     public Noticia getNoticia(@PathVariable(value="id") Long id){
-        return noticiaRepository.findNoticiaById(id);
+        return noticiaRepository.getNoticia(id);
     }
 
     @PostMapping("/noticias")
     public Noticia createNoticia(@RequestBody Noticia noticia){
-        return noticiaRepository.save(noticia);
+        return noticiaRepository.createNoticia(noticia);
     }
 
     @DeleteMapping("/noticia/{id}")
     public ResponseEntity<Noticia> deleteNoticia(@PathVariable (value = "id") Long id){
-        noticiaRepository.delete(noticiaRepository.findNoticiaById(id));
+        noticiaRepository.deleteNoticia(id);
         return ResponseEntity.ok().build();
     }
 }

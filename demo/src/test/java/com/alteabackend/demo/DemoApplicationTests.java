@@ -1,4 +1,4 @@
-package backend.demo;
+package com.alteabackend.demo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

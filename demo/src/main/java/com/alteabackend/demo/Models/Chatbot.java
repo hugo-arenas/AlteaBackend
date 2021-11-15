@@ -1,38 +1,38 @@
 package com.alteabackend.demo.Models;
 
 public class Chatbot {
-    private Long id;
-    private String Nombre;
-    private String Descripcion;
+    private static Long id;
+    private static String Nombre;
+    private static String Descripcion;
 
     public Chatbot(Long id, String Nombre, String Descripcion){
-        this.id = id;
-        this.Nombre = Nombre;
-        this.Descripcion = Descripcion;
+        Chatbot.id = id;
+        Chatbot.Nombre = Nombre;
+        Chatbot.Descripcion = Descripcion;
     }
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public static void setId(Long id) {
+        Chatbot.id = id;
     }
 
-    public String getNombre() {
+    public static String getNombre() {
         return Nombre;
     }
 
     public void setNombre(String Nombre) {
-        this.Nombre = Nombre;
+        Chatbot.Nombre = Nombre;
     }
 
-    public String getDescripcion() {
+    public static String getDescripcion() {
         return Descripcion;
     }
 
     public void setDescripcion(String Descripcion) {
-        this.Descripcion = Descripcion;
+        Chatbot.Descripcion = Descripcion;
     }
 
 }

@@ -1,7 +1,6 @@
 package com.alteabackend.demo.Repositories;
 
 import com.alteabackend.demo.Models.Sintoma;
-import com.alteabackend.demo.Repositories.SintomaRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -42,7 +41,7 @@ public class SintomaRepositoryImp implements SintomaRepository {
         try(Connection conn = sql2o.open()){
             Sintoma v1 = conn.createQuery("select * from Sintoma where Nombre=:Nombre").addParameter("Nombre",Sintoma.getNombre()).executeAndFetchFirst(Sintoma.class);
             if (v1 == null){
-                int insertedId = countSintoma()+1;
+                long insertedId = countSintoma()+1;
                 conn.createQuery("insert into Sintoma (ID, Nombre, Descripcion)"+
                         " values (:id, :Nombre, :Descripcion)") 
                         .addParameter("id",  insertedId)                

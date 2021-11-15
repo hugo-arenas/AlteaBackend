@@ -1,7 +1,6 @@
 package com.alteabackend.demo.Repositories;
 
 import com.alteabackend.demo.Models.Superusuario;
-import com.alteabackend.demo.Repositories.SuperusuarioRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -38,22 +37,22 @@ public class SuperusuarioRepositoryImp implements SuperusuarioRepository {
     }
 
     @Override
-    public Superusuario createSuperUsuario(SuperUsuario SuperUsuario) {
+    public Superusuario createSuperusuario(Superusuario SuperUsuario) {
         try(Connection conn = sql2o.open()){
-            SuperUsuario v1 = conn.createQuery("select * from SuperUsuario where Correo=:Correo").addParameter("Correo",SuperUsuario.getCorreo()).executeAndFetchFirst(SuperUsuario.class);
+            Superusuario v1 = conn.createQuery("select * from SuperUsuario where Correo=:Correo").addParameter("Correo",SuperUsuario.getCorreo()).executeAndFetchFirst(Superusuario.class);
             if (v1 == null){
-                int insertedId = countSuperUsuario()+1;
+                long insertedId = countSuperusuario()+1;
                 conn.createQuery("insert into SuperUsuario (ID, Nombre, Apellido, Correo, Contrasenia, loginToken)"+
                         " values (:ID, :Nombre, :Apellido, :Correo, :Contrasenia)") 
                         .addParameter("ID",  insertedId)                
-                        .addParameter("Nombre", Superusuario.getNombre())
-                        .addParameter("Apellido", Superusuario.getApellido())
-                        .addParameter("correo", Superusuario.getCorreo())
-                        .addParameter("Contrasenia", Superusuario.getContrasenia())
+                        .addParameter("Nombre", SuperUsuario.getNombre())
+                        .addParameter("Apellido", SuperUsuario.getApellido())
+                        .addParameter("correo", SuperUsuario.getCorreo())
+                        .addParameter("Contrasenia", SuperUsuario.getContrasenia())
                         .addParameter("loginToken", 0)
                         .executeUpdate().getKey();
-                Superusuario.setId(insertedId);
-                return Superusuario;  
+                SuperUsuario.setId(insertedId);
+                return SuperUsuario;  
             }else{
                 return null;
             }

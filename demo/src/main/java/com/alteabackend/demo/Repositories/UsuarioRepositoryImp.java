@@ -1,7 +1,6 @@
 package com.alteabackend.demo.Repositories;
 
 import com.alteabackend.demo.Models.Usuario;
-import com.alteabackend.demo.Repositories.UsuarioRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

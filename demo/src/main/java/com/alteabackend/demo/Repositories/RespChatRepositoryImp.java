@@ -42,11 +42,10 @@ public class RespChatRepositoryImp implements RespChatRepository {
         try(Connection conn = sql2o.open()){
             RespChat v1 = conn.createQuery("select * from RespChat where ID=:ID").addParameter("Nombre",RespChat.getId()).executeAndFetchFirst(RespChat.class);
             if (v1 == null){
-                int insertedId = countRespChat()+1;
-                conn.createQuery("insert into RespChat (ID, Nombre, Descripcion, id_chatbot)"+
+                long insertedId = countRespChat()+1;
+                conn.createQuery("insert into RespChat (ID, Descripcion, id_chatbot)"+
                         " values (:id, :RespChatNombre, :RespChatDescripcion, :RespChat_id_chatbot)") 
                         .addParameter("id",  insertedId)                
-                        .addParameter("RespChatNombre", RespChat.getNombre())
                         .addParameter("RespChatDescripcion", RespChat.getDescripcion())
                         .addParameter("RespChat_id_chatbot", RespChat.getId_chatbot())
                         .executeUpdate().getKey();
@@ -79,7 +78,7 @@ public class RespChatRepositoryImp implements RespChatRepository {
 
     @Override
     public RespChat getRespChat(long id){
-		String sql = "select ID AS ID, Nombre AS Nombre, Descripcion AS Descripcion, id_chatbot AS id_chatbot from RespChat where ID=:id";
+		String sql = "select ID AS ID, Descripcion AS Descripcion, id_chatbot AS id_chatbot from RespChat where ID=:id";
 		try (Connection con = sql2o.open()) {
 			return con.createQuery(sql)
 				.addParameter("id", id)
@@ -92,11 +91,10 @@ public class RespChatRepositoryImp implements RespChatRepository {
 
     @Override
     public boolean updateRespChat(RespChat nuevoRespChat){
-        String updateSql = "update RespChat set Nombre = : Nombre, Descripcion = : Descripcion,  id_chatbot = : id_chatbot where id = :id";
+        String updateSql = "update RespChat set Descripcion = : Descripcion,  id_chatbot = : id_chatbot where id = :id";
         try (Connection con = sql2o.open()) {   
             con.createQuery(updateSql)
                 .addParameter("id", nuevoRespChat.getId())
-                .addParameter("Nombre",nuevoRespChat.getNombre())
                 .addParameter("Descripcion", nuevoRespChat.getDescripcion())
                 .addParameter("id_chatbot", nuevoRespChat.getId_chatbot())
                 .executeUpdate();

@@ -1,7 +1,6 @@
 package com.alteabackend.demo.Repositories;
 
 import com.alteabackend.demo.Models.Empresa;
-import com.alteabackend.demo.Repositories.EmpresaRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -12,7 +11,7 @@ import java.util.List;
 
 
 @Repository
-public class EmpresaRepositoryImp implements EmpresaReposaaaitory {
+public class EmpresaRepositoryImp implements EmpresaRepository {
     
     @Autowired
     private Sql2o sql2o;
@@ -40,19 +39,19 @@ public class EmpresaRepositoryImp implements EmpresaReposaaaitory {
     @Override
     public Empresa createEmpresa(Empresa empresa) {
         try(Connection conn = sql2o.open()){
-            Empresa v1 = conn.createQuery("select * from Empresa where Correo=:Correo").addParameter("Corr",SuperUsuario.getCorreo()).executeAndFetchFirst(SuperUsuario.class);
+            Empresa v1 = conn.createQuery("select * from Empresa where Correo=:Correo").addParameter("Correo",empresa.getCorreo()).executeAndFetchFirst(Empresa.class);
             if (v1 == null){
-                int insertedId = countEmpresa()+1;
+                long insertedId = countEmpresa()+1;
                 conn.createQuery("insert into Empresa (ID, Nombre, Correo, Contrasenia, loginToken)"+
                         " values (:id, :EmpresaNombre, :correo, :pass)") 
                         .addParameter("id",  insertedId)                
-                        .addParameter("EmpresaNombre", Empresa.getNombre())
-                        .addParameter("correo", Empresa.getCorreo())
-                        .addParameter("pass", Empresa.getContrasenia())
+                        .addParameter("EmpresaNombre", empresa.getNombre())
+                        .addParameter("correo", empresa.getCorreo())
+                        .addParameter("pass", empresa.getContrasenia())
                         .addParameter("loginToken", 0)
                         .executeUpdate().getKey();
-                Empresa.setId(insertedId);
-                return Empresa;  
+                empresa.setId(insertedId);
+                return empresa;  
             }else{
                 return null;
             }

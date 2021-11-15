@@ -1,8 +1,6 @@
 package com.alteabackend.demo.Repositories;
 
 import com.alteabackend.demo.Models.Chatbot;
-import com.alteabackend.demo.Repositories.ChatbotRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.sql2o.Connection;
@@ -41,7 +39,7 @@ public class ChatbotRepositoryImp implements ChatbotRepository {
         try(Connection conn = sql2o.open()){
             Chatbot v1 = conn.createQuery("select * from Chatbot where Nombre=:Nombre").addParameter("Nombre",Chatbot.getNombre()).executeAndFetchFirst(Chatbot.class);
             if (v1 == null){
-                int insertedId = countChatbot()+1;
+                long insertedId = countChatbot()+1;
                 conn.createQuery("insert into Chatbot (ID, Nombre, Descripcion)"+
                         " values (:id, :ChatbotNombre, :ChatbotDescripcion)") 
                         .addParameter("id",  insertedId)                
@@ -49,7 +47,7 @@ public class ChatbotRepositoryImp implements ChatbotRepository {
                         .addParameter("ChatbotDescripcion", Chatbot.getDescripcion())
                         .executeUpdate().getKey();
                 Chatbot.setId(insertedId);
-                return Chatbot;  
+                return chatbot;  
             }else{
                 return null;
             }
@@ -93,8 +91,8 @@ public class ChatbotRepositoryImp implements ChatbotRepository {
         String updateSql = "update Chatbot set Nombre = : Nombre, Descripcion = : Descripcion where id = :id";
         try (Connection con = sql2o.open()) {   
             con.createQuery(updateSql)
-                .addParameter("Descripcion", nuevoChatbot.getDescripcion())
-                .addParameter("Nombre",nuevoChatbot.getNombre())
+                .addParameter("Descripcion", Chatbot.getDescripcion())
+                .addParameter("Nombre",Chatbot.getNombre())
                 .addParameter("id", nuevoChatbot.getId())
                 .executeUpdate();
             return true;

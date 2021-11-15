@@ -1,7 +1,6 @@
 package com.alteabackend.demo.Repositories;
 
 import com.alteabackend.demo.Models.Consejo;
-import com.alteabackend.demo.Repositories.ConsejoRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -42,7 +41,7 @@ public class ConsejoRepositoryImp implements ConsejoRepository {
         try(Connection conn = sql2o.open()){
             Consejo v1 = conn.createQuery("select * from Consejo where Nombre=:Nombre").addParameter("Nombre",Consejo.getNombre()).executeAndFetchFirst(Consejo.class);
             if (v1 == null){
-                int insertedId = countConsejo()+1;
+                long insertedId = countConsejo()+1;
                 conn.createQuery("insert into Consejo (ID, Nombre, Descripcion)"+
                         " values (:id, :ConsejoNombre, :ConsejoDescripcion)") 
                         .addParameter("id",  insertedId)                

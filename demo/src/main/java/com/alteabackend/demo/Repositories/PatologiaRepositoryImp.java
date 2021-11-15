@@ -42,7 +42,7 @@ public class PatologiaRepositoryImp implements PatologiaRepository {
         try(Connection conn = sql2o.open()){
             Patologia v1 = conn.createQuery("select * from Patologia where Nombre=:Nombre").addParameter("Nombre",Patologia.getNombre()).executeAndFetchFirst(Patologia.class);
             if (v1 == null){
-                int insertedId = countPatologia()+1;
+                long insertedId = countPatologia()+1;
                 conn.createQuery("insert into Patologia (ID, Nombre, Descripcion, Recomendacion)"+
                         " values (:id, :PatologiaNombre, :PatologiaDescripcion, :PatologiaRecomendacion)") 
                         .addParameter("id",  insertedId)                

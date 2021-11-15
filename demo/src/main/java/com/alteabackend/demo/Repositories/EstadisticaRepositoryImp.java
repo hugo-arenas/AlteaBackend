@@ -1,7 +1,6 @@
 package com.alteabackend.demo.Repositories;
 
 import com.alteabackend.demo.Models.Estadistica;
-import com.alteabackend.demo.Repositories.EstadisticaRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -42,7 +41,7 @@ public class EstadisticaRepositoryImp implements EstadisticaRepository {
         try(Connection conn = sql2o.open()){
             Estadistica v1 = conn.createQuery("select * from Estadistica where Nombre=:Nombre").addParameter("Nombre",Estadistica.getNombre()).executeAndFetchFirst(Estadistica.class);
             if (v1 == null){
-                int insertedId = countEstadistica()+1;
+                long insertedId = countEstadistica()+1;
                 conn.createQuery("insert into Estadistica (ID, Nombre, Descripcion)"+
                         " values (:id, :EstadisticaNombre, :EstadisticaDescripcion)") 
                         .addParameter("id",  insertedId)                

@@ -1,7 +1,6 @@
 package com.alteabackend.demo.Repositories;
 
 import com.alteabackend.demo.Models.Noticia;
-import com.alteabackend.demo.Repositories.NoticiaRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -42,7 +41,7 @@ public class NoticiaRepositoryImp implements NoticiaRepository {
         try(Connection conn = sql2o.open()){
             Noticia v1 = conn.createQuery("select * from Noticia where Nombre=:Nombre").addParameter("Nombre",Noticia.getNombre()).executeAndFetchFirst(Noticia.class);
             if (v1 == null){
-                int insertedId = countNoticia()+1;
+                long insertedId = countNoticia()+1;
                 conn.createQuery("insert into Noticia (ID, Nombre, Descripcion)"+
                         " values (:id, :NoticiaNombre, :NoticiaDescripcion)") 
                         .addParameter("id",  insertedId)                

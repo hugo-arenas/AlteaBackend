@@ -1,7 +1,6 @@
 package com.alteabackend.demo.Repositories;
 
 import com.alteabackend.demo.Models.RespUs;
-import com.alteabackend.demo.Repositories.RespUsRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -41,13 +40,13 @@ public class RespUsRepositoryImp implements RespUsRepository {
         try(Connection conn = sql2o.open()){
             RespUs v1 = conn.createQuery("select * from RespUs where ID=:ID").addParameter("ID",RespUs.getId()).executeAndFetchFirst(RespUs.class);
             if (v1 == null){
-                int insertedId = countRespUs()+1;
+                long insertedId = countRespUs()+1;
                 conn.createQuery("insert into RespUs (ID, Descripcion, id_RespChat, id_Usuario )"+
                         " values (:id, :Descripcion, :id_RespChat, :id_Usuario)") 
                         .addParameter("id",  insertedId)             
                         .addParameter("Descripcion", RespUs.getDescripcion())
-                        .addParameter("id_ResChat", RespUs.getRespChat())
-                        .addParameter("id_Usuario", RespUs.getUsuario())
+                        .addParameter("id_ResChat", RespUs.getId_RespChat())
+                        .addParameter("id_Usuario", RespUs.getId_Usuario())
                         .executeUpdate().getKey();
                 RespUs.setId(insertedId);
                 return RespUs;  
